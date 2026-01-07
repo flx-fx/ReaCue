@@ -56,8 +56,8 @@ export function App() {
     }
 
     return <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
-        <div className="flex justify-center items-center min-h-screen w-full">
-            <Card className="relative w-full max-w-md overflow-hidden">
+        <div className="flex justify-center sm:items-center items-start min-h-screen w-full">
+            <Card className="relative w-full m-4 min-w-xs overflow-hidden ring-0 bg-transparent shadow-none rounded-none sm:ring-1 sm:bg-card sm:shadow-sm sm:rounded-xl sm:max-w-md sm:m-0">
                 <CardHeader>
                     <CardTitle className="text-lg font-bold flex gap-2 items-center"><Logo
                         className="h-3"/>ReaCue</CardTitle>
@@ -132,8 +132,9 @@ export function App() {
                             <NumberInput id={"cue-list"} value={cueList} onChange={(value) => setCueList(value)}/>
                         </Field> : ""}
                     </FieldGroup>
+                    <div className="h-20 sm:hidden"/>
                 </CardContent>
-                <CardFooter className="justify-between">
+                <CardFooter className="justify-between sm:relative sm:rounded-xl fixed w-full rounded-none bottom-0 left-0 bg-card sm:bg-muted/50">
                     <Button disabled={!selectedFile} onClick={generateEosImport}>
                         <IconDownload/>Export EOS data (.csv)
                     </Button>
