@@ -3,3 +3,5 @@ export type Marker = {
     time: number;
     name: string;
 }
+
+export type TimeCodeMode = "midi" | "smtp"
