@@ -1,6 +1,6 @@
 import type {Marker, Tempo, TimecodeSource} from "@/types";
 
-export function generateEosImport(projectFiles: File[], eventList: number, timecodeSource: TimecodeSource, timecodeOffset: string, createCues: boolean, cueList: number, smartCueNumbers: boolean, firstCue: number, firstEvent: number) {
+export function generateEosImport(projectFiles: File[], eventList: number, timecodeSource: TimecodeSource, timecodeOffset: string, createCueLinks: boolean, cueList: number, smartCueNumbers: boolean, firstCue: number, firstEvent: number) {
     return async () => {
         if (!projectFiles.length) return;
         try {
@@ -16,9 +16,9 @@ export function generateEosImport(projectFiles: File[], eventList: number, timec
                 const label = marker.name.replaceAll("\"", "");
                 const timecode = timecodeSum(getTimeCodeFromSeconds(marker.time), timecodeOffset);
                 const beats = Math.round(marker.time * tempo.bpm / 60 * 1000) / 1000;
-                const measure = Math.round((beats / tempo.m1) + 1);
+                const measure = Math.floor((beats / tempo.m1) + 1);
                 const beat = Math.round((beats % tempo.m1 + 1) * 100);
-                const cue = createCues && `Cue  ${cueList} / ${smartCueNumbers ? `${measure}.${beat} ` : (firstCue) + index}`;
+                const cue = createCueLinks ? `Cue  ${cueList} / ${smartCueNumbers ? `${measure}.${beat} ` : (firstCue) + index}` : "";
 
                 return `28,Event,${eventList},${index + firstEvent},${timecodeSource === "midi" ? 1 : 2},"${label}",${timecode},,,${cue}`
             }))

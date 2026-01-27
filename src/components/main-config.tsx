@@ -29,7 +29,7 @@ const MainConfig = () => {
     const [smartCueNumbers, setSmartCueNumbers] = useState<boolean>(false);
     const [timecodeSource, setTimecodeSource] = useState<TimecodeSource>("midi");
 
-    const handleGenerate = generateEosImport(projectFiles, eventList, timecodeSource, timecodeOffset, createCues, cueList, smartCueNumbers, firstCue, firstEvent);
+    const handleGenerate = generateEosImport(projectFiles, eventList, timecodeSource, timecodeOffset, createCueLinks, cueList, smartCueNumbers, firstCue, firstEvent);
 
     return (<Card
         className="relative w-full m-4 min-w-xs overflow-hidden ring-0 bg-transparent shadow-none rounded-none box-shadow-sm box-shadow-primary sm:ring-1 sm:bg-card sm:shadow-sm sm:rounded-xl sm:max-w-md sm:m-0">
