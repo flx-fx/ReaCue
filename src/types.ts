@@ -4,4 +4,11 @@ export type Marker = {
     name: string;
 }
 
-export type TimeCodeMode = "midi" | "smtp"
+export type Tempo = {
+    bpm: number;
+    m1: number;
+    m2: number;
+    bpmBasis: 0|1|2|3|4|5
+}
+
+export type TimecodeSource = "midi" | "smpte"

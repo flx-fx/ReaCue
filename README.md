@@ -1,3 +1,4 @@
 # ReaCue
 
-This is a mini client-side web tool to extract markers from a Reaper Project File and convert them into Show Control Events on ETC EOS.
+ReaCue is a small client-side web tool to extract markers from a REAPER project file and convert them into show control
+events on ETC Eos. It offers options to configure timecode offset, the event list or automatic creation of cues in Eos.
