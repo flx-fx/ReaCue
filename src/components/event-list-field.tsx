@@ -47,9 +47,9 @@ const EventListField = ({ eventList, firstEvent, setEventList, setFirstEvent }: 
         <FieldContent>
             <FieldLabel>Event list</FieldLabel>
         </FieldContent>
-        <p className="text-muted-foreground">Import starting at Event</p>
+        <p className="text-muted-foreground select-none">Import starting at Event</p>
         <ButtonGroup>
-            <ButtonGroupText className="font-mono">
+            <ButtonGroupText className="font-mono select-none">
                 {eventList} / {firstEvent}
             </ButtonGroupText>
             <EventListSettingsPopover eventList={eventList} firstEvent={firstEvent} setEventList={setEventList} setFirstEvent={setFirstEvent} />

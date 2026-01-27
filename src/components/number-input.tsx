@@ -30,7 +30,7 @@ export default function NumberInput({id, value, onChange, elementBefore, disable
 
     return <div className="flex">
         <ButtonGroup>
-            {elementBefore && <ButtonGroupText className={disabled ? "text-muted-foreground" : ""}>{elementBefore}</ButtonGroupText>}
+            {elementBefore && <ButtonGroupText className={disabled ? "text-muted-foreground select-none" : "select-none"}>{elementBefore}</ButtonGroupText>}
             <Input className="rounded-r-none! font-mono" size={4} maxLength={4} id={id}
                    value={value ?? ""}
                    onChange={handleChange} placeholder="123" disabled={disabled}/>

@@ -101,7 +101,7 @@ const CueLinkField = ({
         <FieldContent>
             <FieldLabel>Cue links</FieldLabel>
         </FieldContent>
-        {createCueLinks && <p className="text-muted-foreground">Reference cues starting at Cue</p>}
+        {createCueLinks && <p className="text-muted-foreground select-none">Reference cues starting at Cue</p>}
         <ButtonGroup>
             {createCueLinks && <>
                 <ButtonGroupText
@@ -109,7 +109,7 @@ const CueLinkField = ({
                     <Tooltip disabled={!smartCueNumbers}>
                         <TooltipTrigger><p
                             className="flex items-center">{cueList} / {smartCueNumbers ?
-                            <IconSparkles2/> : firstCue}</p></TooltipTrigger>
+                            <IconSparkles2 className="inline! h-[1em]! ml-0.5 w-auto! align-text-center! text-primary"/> : firstCue}</p></TooltipTrigger>
                         <TooltipContent>
                             Smart cue numbering is active
                         </TooltipContent>

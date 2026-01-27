@@ -34,11 +34,11 @@ const MainConfig = () => {
     return (<Card
         className="relative w-full m-4 min-w-xs overflow-hidden ring-0 bg-transparent shadow-none rounded-none box-shadow-sm box-shadow-primary sm:ring-1 sm:bg-card sm:shadow-sm sm:rounded-xl sm:max-w-md sm:m-0">
         <CardHeader>
-            <CardTitle className="text-lg font-bold flex gap-2 items-center">
+            <CardTitle className="text-lg font-bold flex gap-2 items-center select-none">
                 <Logo className="inline h-[0.7em] w-auto align-text-top"/>
                 ReaCue
             </CardTitle>
-            <CardDescription>
+            <CardDescription className="select-none">
                 Convert REAPER markers into Eos event list entries for timecode-driven playback.
             </CardDescription>
         </CardHeader>
@@ -67,7 +67,7 @@ const MainConfig = () => {
                     <IconDownload/>Export EOS show data (.csv)
                 </Button>
                 <Tooltip>
-                    <TooltipTrigger render={<Button size="icon" variant="ghost">
+                    <TooltipTrigger render={<Button size="icon" variant="ghost" className="cursor-help text-muted-foreground">
                         <IconQuestionMark/>
                     </Button>}/>
                     <TooltipContent>
