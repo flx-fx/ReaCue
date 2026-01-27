@@ -75,6 +75,7 @@ const MainConfig = () => {
                         <p>In Eos: Navigate to <Kbd>CIA</Kbd><IconChevronRight
                             className="inline h-[1.1em] w-auto align-text-center"/>
                             <Kbd>Browser</Kbd><IconChevronRight className="inline h-[1.1em] w-auto align-text-center"/>
+                            <Kbd>File</Kbd><IconChevronRight className="inline h-[1.1em] w-auto align-text-center"/>
                             <Kbd>Import</Kbd><IconChevronRight className="inline h-[1.1em] w-auto align-text-center"/>
                             <Kbd>Csv</Kbd> and browse for the file exported from ReaCue.</p>
                     </TooltipContent>
