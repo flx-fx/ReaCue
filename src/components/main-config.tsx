@@ -10,12 +10,13 @@ import GitHubButton from "./github-button";
 import {ModeToggle} from "./mode-toggle";
 import {useState} from "react";
 import type {TimecodeSource} from "@/types";
-import {generateEosImport} from "@/lib/core";
 import {Button} from "./ui/button";
 import TimecodeOffsetField from "./timecode-offset-field";
 import EventListField from "./event-list-field";
 import {Tooltip, TooltipContent, TooltipTrigger} from "@/components/ui/tooltip.tsx";
 import {Kbd} from "@/components/ui/kbd.tsx";
+import {cn} from "@/lib/utils.ts";
+import {exportShowDataFile} from "@/lib/show-data-export.ts";
 
 const MainConfig = () => {
     const [projectFiles, setProjectFiles] = useState<File[]>([]);
@@ -29,14 +30,27 @@ const MainConfig = () => {
     const [smartCueNumbers, setSmartCueNumbers] = useState<boolean>(false);
     const [timecodeSource, setTimecodeSource] = useState<TimecodeSource>("midi");
 
-    const handleGenerate = generateEosImport(projectFiles, eventList, timecodeSource, timecodeOffset, createCueLinks, cueList, smartCueNumbers, firstCue, firstEvent);
+    const handleExportShowData = () => exportShowDataFile(projectFiles[0], {
+        eventList,
+        timecodeSource,
+        timecodeOffset,
+        createCueLinks,
+        cueList,
+        smartCueNumbers,
+        firstCue,
+        firstEvent,
+        createCues
+    });
 
-    return (<Card
-        className="relative w-full m-4 min-w-xs overflow-hidden ring-0 bg-transparent shadow-none rounded-none box-shadow-sm box-shadow-primary sm:ring-1 sm:bg-card sm:shadow-sm sm:rounded-xl sm:max-w-md sm:m-0">
+    return <Card className={cn(
+        "relative w-full m-4 min-w-xs overflow-hidden",
+        "ring-0 bg-transparent shadow-none rounded-none box-shadow-sm box-shadow-primary",
+        "sm:ring-1 sm:bg-card sm:shadow-sm sm:rounded-xl sm:max-w-md sm:m-0"
+    )}>
         <CardHeader>
             <CardTitle className="text-lg font-bold flex gap-2 items-center select-none">
                 <Logo className="inline h-[0.7em] w-auto align-text-top"/>
-                ReaCue
+                <h1>ReaCue</h1>
             </CardTitle>
             <CardDescription className="select-none">
                 Convert REAPER markers into Eos event list entries for timecode-driven playback.
@@ -48,32 +62,44 @@ const MainConfig = () => {
                 <FieldSeparator/>
                 <TimecodeOffsetField setTimecodeOffset={setTimecodeOffset}/>
                 <FieldSeparator/>
-                <EventListField eventList={eventList} firstEvent={firstEvent} setEventList={setEventList}
+                <EventListField eventList={eventList}
+                                firstEvent={firstEvent}
+                                setEventList={setEventList}
                                 setFirstEvent={setFirstEvent}/>
                 <FieldSeparator/>
-                <CueLinkField cueList={cueList} firstCue={firstCue} createCueLinks={createCueLinks}
-                              createCues={createCues} smartCueNumbers={smartCueNumbers} setCueList={setCueList}
-                              setFirstCue={setFirstCue} setCreateCueLinks={setCreateCueLinks}
-                              setCreateCues={setCreateCues} setSmartCueNumbers={setSmartCueNumbers}/>
+                <CueLinkField cueList={cueList}
+                              firstCue={firstCue}
+                              createCueLinks={createCueLinks}
+                              createCues={createCues}
+                              smartCueNumbers={smartCueNumbers}
+                              setCueList={setCueList}
+                              setFirstCue={setFirstCue}
+                              setCreateCueLinks={setCreateCueLinks}
+                              setCreateCues={setCreateCues}
+                              setSmartCueNumbers={setSmartCueNumbers}/>
                 <FieldSeparator/>
                 <TimecodeSourceField timecodeSource={timecodeSource} setTimecodeSource={setTimecodeSource}/>
             </FieldGroup>
             <div className="h-20 sm:hidden"/>
         </CardContent>
-        <CardFooter
-            className="justify-between sm:relative sm:rounded-xl fixed w-full rounded-none bottom-0 left-0 bg-card sm:bg-muted/50">
+        <CardFooter className={cn(
+            "justify-between fixed w-full rounded-none bottom-0 left-0 bg-card",
+            "sm:relative sm:rounded-xl sm:bg-muted/50"
+        )}>
             <div className="flex gap-1">
-                <Button disabled={!projectFiles.length} onClick={handleGenerate}>
+                <Button disabled={!projectFiles.length} onClick={handleExportShowData}>
                     <IconDownload/>Export EOS show data (.csv)
                 </Button>
                 <Tooltip>
-                    <TooltipTrigger render={<Button size="icon" variant="ghost" className="cursor-help text-muted-foreground">
-                        <IconQuestionMark/>
-                    </Button>}/>
+                    <TooltipTrigger render={
+                        <Button size="icon" variant="ghost" className="cursor-help text-muted-foreground">
+                            <IconQuestionMark/>
+                        </Button>
+                    }/>
                     <TooltipContent>
                         <strong>Importing show data in Eos:</strong>
-                        <p>In Eos: Navigate to <Kbd>CIA</Kbd><IconChevronRight
-                            className="inline h-[1.1em] w-auto align-text-center"/>
+                        <p>In Eos: Navigate
+                            to <Kbd>CIA</Kbd><IconChevronRight className="inline h-[1.1em] w-auto align-text-center"/>
                             <Kbd>Browser</Kbd><IconChevronRight className="inline h-[1.1em] w-auto align-text-center"/>
                             <Kbd>File</Kbd><IconChevronRight className="inline h-[1.1em] w-auto align-text-center"/>
                             <Kbd>Import</Kbd><IconChevronRight className="inline h-[1.1em] w-auto align-text-center"/>
@@ -85,7 +111,7 @@ const MainConfig = () => {
                 <ModeToggle/>
             </ButtonGroup>
         </CardFooter>
-    </Card>)
+    </Card>
 }
 
 export default MainConfig;

@@ -39,36 +39,28 @@ const CueLinkSettingsPopover = ({
             <FieldGroup className="gap-4">
                 <Field orientation={"horizontal"}>
                     <FieldLabel htmlFor="cue-list">Cue List</FieldLabel>
-                    <NumberInput id={"cue-list"} value={cueList}
-                                 onChange={(value) => setCueList(value)}/>
+                    <NumberInput id={"cue-list"} value={cueList} onChange={(value) => setCueList(value)}/>
                 </Field>
                 <Tooltip disabled={!smartCueNumbers}>
                     <TooltipTrigger render={<Field orientation={"horizontal"}>
-                        <FieldLabel htmlFor="first-cue"
-                                    className={smartCueNumbers ? "text-muted-foreground" : ""}>First
-                            Cue</FieldLabel>
-                        <NumberInput id={"first-cue"} value={firstCue}
+                        <FieldLabel htmlFor="first-cue" className={smartCueNumbers ? "text-muted-foreground" : ""}>
+                            First Cue
+                        </FieldLabel>
+                        <NumberInput id={"first-cue"}
+                                     value={firstCue}
                                      onChange={(value) => setFirstCue(value)}
-                                     elementBefore={<p
-                                         className="font-mono">{cueList} /</p>}
-                                     disabled={smartCueNumbers}/>
+                                     disabled={smartCueNumbers}
+                                     elementBefore={<p className="font-mono">{cueList} /</p>}/>
                     </Field>}/>
                     <TooltipContent>
                         Disable "Smart cue numbering" to manually set the first cue.
                     </TooltipContent>
                 </Tooltip>
                 <FieldSeparator/>
-                <Tooltip>
-                    <TooltipTrigger render={<Field orientation={"horizontal"}>
-                        <FieldLabel htmlFor="create-cues"
-                                    className="text-muted-foreground">Create
-                            cues</FieldLabel>
-                        <Switch id={"create-cues"} checked={createCues} onCheckedChange={setCreateCues} disabled/>
-                    </Field>}/>
-                    <TooltipContent>
-                        Coming Soon
-                    </TooltipContent>
-                </Tooltip>
+                <Field orientation={"horizontal"}>
+                    <FieldLabel htmlFor="create-cues">Create cues</FieldLabel>
+                    <Switch id={"create-cues"} checked={createCues} onCheckedChange={setCreateCues}/>
+                </Field>
                 <Field orientation={"horizontal"}>
                     <FieldContent>
                         <FieldLabel htmlFor="smart-cue-numbering">Smart cue numbering</FieldLabel>
@@ -108,8 +100,9 @@ const CueLinkField = ({
                     className={`font-mono ${smartCueNumbers ? "bg-primary/10 border-primary" : ""}`}>
                     <Tooltip disabled={!smartCueNumbers}>
                         <TooltipTrigger><p
-                            className="flex items-center">{cueList} / {smartCueNumbers ?
-                            <IconSparkles2 className="inline! h-[1em]! ml-0.5 w-auto! align-text-center! text-primary"/> : firstCue}</p></TooltipTrigger>
+                            className="flex items-center">{cueList} / {smartCueNumbers ? <IconSparkles2
+                            className="inline! h-[1em]! ml-0.5 w-auto! align-text-center! text-primary"/> : firstCue}</p>
+                        </TooltipTrigger>
                         <TooltipContent>
                             Smart cue numbering is active
                         </TooltipContent>
