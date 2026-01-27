@@ -11,7 +11,7 @@ export function generateEosImport(projectFiles: File[], eventList: number, timec
             const lines: string[] = [];
             lines.push("START_SHOWCONTROL");
             lines.push("TARGET_TYPE,TARGET_TYPE_AS_TEXT,TARGET_LIST_NUMBER,TARGET_ID,PART_NUMBER,LABEL,TIME_ADDRESS,DATE,TRIGGER,ACTION");
-            lines.push(`28,Event,${eventList},0,${timecodeSource === "midi" ? 1 : 2},,,,Source 1,${timecodeSource.toUpperCase()}`);
+            lines.push(`28,Event,${eventList},0,${timecodeSource === "midi" ? 1 : 2},,,,Source 1 External,${timecodeSource.toUpperCase()}`);
             lines.push(...markers.map((marker, index) => {
                 const label = marker.name.replaceAll("\"", "");
                 const timecode = timecodeSum(getTimeCodeFromSeconds(marker.time), timecodeOffset);
@@ -24,7 +24,7 @@ export function generateEosImport(projectFiles: File[], eventList: number, timec
             }))
             lines.push("END_SHOWCONTROL");
 
-            exportEosCsvFile(lines.join("\n"))
+            exportEosCsvFile(lines.join("\n"), projectFiles[0].name.replace(".rpp", ""))
         } catch (err) {
             console.error("Failed to read file:", err);
         }
@@ -61,12 +61,12 @@ export function getTimeCodeFromSeconds(time: number, fps: number = 30) {
   return `${hours}:${minutes}:${seconds}:${frames}`;
 }
 
-export function exportEosCsvFile(content: string) {
+export function exportEosCsvFile(content: string, projectName: string) {
   const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `reacue_eos-data_${Date.now().toFixed()}.csv`;
+  a.download = `ReaCue_ShowData_${projectName}.csv`;
   document.body.appendChild(a);
   a.click();
   a.remove();
